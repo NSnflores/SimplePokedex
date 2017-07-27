@@ -1,6 +1,7 @@
 package com.apps.salu.endlessscrollrecycler;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -8,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.squareup.picasso.Picasso;
 
@@ -21,16 +23,34 @@ public class PokemonAdapter extends RecyclerView.Adapter<PokemonAdapter.MyViewHo
     private List<Pokemon> pokemons;
     private Activity context;
 
-    public class MyViewHolder extends RecyclerView.ViewHolder {
+    public class MyViewHolder extends RecyclerView.ViewHolder  implements View.OnClickListener{
         public TextView title;
         public TextView weight;
         public ImageView image;
+
+        public int getPokeId() {
+            return pokeId;
+        }
+
+        public void setPokeId(int pokeId) {
+            this.pokeId = pokeId;
+        }
+
+        private int pokeId;
 
         public MyViewHolder(View view) {
             super(view);
             title = (TextView) view.findViewById(R.id.nameText);
             weight = (TextView) view.findViewById(R.id.weightText);
             image = (ImageView) view.findViewById(R.id.imagePokemon);
+            view.setOnClickListener(this);
+        }
+
+        @Override
+        public void onClick(View view) {
+            Intent intent = new Intent(context, PokemonInfo.class);
+            intent.putExtra("id", pokeId);
+            context.startActivity(intent);
         }
     }
 
@@ -52,10 +72,10 @@ public class PokemonAdapter extends RecyclerView.Adapter<PokemonAdapter.MyViewHo
         int id = pokemons.get(position).getId();
         String name = pokemons.get(position).getName();
         holder.title.setText(id + ". " + name);
+        holder.setPokeId(id);
         String weig = pokemons.get(position).getWeight()+"lbs";
         holder.weight.setText(weig);
         String ima = pokemons.get(position).getSpritePath();
-        Log.e("IMAGE",ima);
         Picasso.with(context)
                 .load(pokemons.get(position).getSpritePath())
                 .resize(100,100)

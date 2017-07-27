@@ -11,8 +11,11 @@ public class Pokemon {
     private String name = "null";
     private float weight = 0;
     private int id = 0;
+    private String info;
 
-    public boolean calledLoad = false;
+    public String getInfo() { return info; }
+
+    public void setInfo(String info) { this.info = info; }
 
     public int getId() {
         return id;
@@ -46,8 +49,7 @@ public class Pokemon {
         this.weight = weight;
     }
 
-    public Pokemon(){
-    }
+    public Pokemon(){}
 
     public Pokemon toId(int id){
         this.id = id;
@@ -63,6 +65,10 @@ public class Pokemon {
     }
     public Pokemon toPath(String path){
         this.spritePath = path;
+        return this;
+    }
+    public Pokemon toInfo(String info){
+        this.info = info;
         return this;
     }
 }

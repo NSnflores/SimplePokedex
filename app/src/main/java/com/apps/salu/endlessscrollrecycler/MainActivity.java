@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import java.util.ArrayList;
@@ -17,17 +18,18 @@ import static com.apps.salu.endlessscrollrecycler.EndlessScrollListener.textView
 
 public class MainActivity extends AppCompatActivity {
     List<Pokemon> pokemons = new ArrayList<>();
+    ProgressBar progressBar;
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        PokemonQueue.init();
-
+        PokemonQueue.init(this);
         setContentView(R.layout.activity_main);
         textView = (TextView)findViewById(R.id.tv1);
         RecyclerView lvItems = (RecyclerView) findViewById(R.id.lvItems);
         adapter = new PokemonAdapter(pokemons, this);
+        progressBar = (ProgressBar)findViewById(R.id.progress);
         LinearLayoutManager mLayoutManager = new LinearLayoutManager(this);
         lvItems.setLayoutManager(mLayoutManager);
         lvItems.setAdapter(adapter);
@@ -40,16 +42,6 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         };
-
         lvItems.addOnScrollListener(listener);
-
-        pokemons.add(PokemonQueue.getPokemon());
-        adapter.notifyDataSetChanged();
-    }
-
-    @Override
-    public void onRequestPermissionsResult(int requestCode,
-                                           String permissions[], int[] grantResults) {
-        Log.e(requestCode+"lsogogogo",requestCode+"");
     }
 }

@@ -21,14 +21,14 @@
             android:id="@+id/nameText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Name: "
+            android:text=""
             android:textSize="30sp" />
 
         <TextView
             android:id="@+id/weightText"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Weight: "
+            android:text=""
             android:textSize="24sp" />
     </LinearLayout>
 </LinearLayout>
