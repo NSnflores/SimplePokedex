@@ -7,10 +7,10 @@ package com.apps.salu.endlessscrollrecycler;
 
 public class Pokemon {
 
-    private String spritePath ="";
-    private String name = "null";
-    private float weight = 0;
-    private int id = 0;
+    private String spritePath;
+    private String name;
+    private float weight;
+    private int id;
     private String info;
 
     public String getInfo() { return info; }

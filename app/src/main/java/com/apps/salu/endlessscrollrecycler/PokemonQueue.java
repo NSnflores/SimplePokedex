@@ -54,7 +54,6 @@ public class PokemonQueue {
                 // StatusLine stat = response.getStatusLine();
                 int status = response.getStatusLine().getStatusCode();
                 if (status == 200) {
-                    Log.e("Status", "200");
                     HttpEntity entity = response.getEntity();
                     String data = EntityUtils.toString(entity);
                     JSONObject jsono = new JSONObject(data);
@@ -73,9 +72,7 @@ public class PokemonQueue {
                     }
                     return true;
                 }
-                Log.e("Status", "Not 200");
             } catch (Exception e) {
-                Log.e("Exception", "on request");
                 e.printStackTrace();
             }
             return false;
@@ -88,7 +85,6 @@ public class PokemonQueue {
                 mainActivity.progressBar.setVisibility(View.GONE);
             }
             else {
-                Log.e("Loading status", "FAILED,  retrying");
                 new PokemonGetter().execute();
             }
         }
